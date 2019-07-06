@@ -1,8 +1,9 @@
 # PhotoniClock
 PhotoniClock firmware, and software utilities.
-Follow the steps below to build the source and flash to the PhotoniClock.
 
-This software can be built using two methods:
+Follow this guide to build the source and flash to the PhotoniClock.
+
+The PhotoniClock firmware can be built using two methods:
 1. Using a containerized environment with Docker.
 2. Using the Arduino IDE (after updating AVR-GCC).
 
