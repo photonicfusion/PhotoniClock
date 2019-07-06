@@ -1,5 +1,5 @@
-# PhotoniClock_tmp
-PhotoniClock firmware and utilities.
+# PhotoniClock
+PhotoniClock firmware, and software utilities.
 Follow the steps below to build the source and flash to the PhotoniClock.
 
 This software can be built using two methods:
