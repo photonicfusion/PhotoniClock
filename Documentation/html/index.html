@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>PhotoniClock User Manual</title>
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
+    
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart', 'orgchart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawMainMenu);
+        google.charts.setOnLoadCallback(drawInfoMenu);
+        
+        // Callback that creates and populates the menu chart
+        function drawMainMenu()
+        {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Node');
+            data.addColumn('string', 'Parent');
+
+            data.addRows([
+                [{v:'Main_Menu', f:'<a href="#TOC_Main_Menu">Main Menu</a>'}, ''],
+                [{v:'Alarm_Menu', f:'<a href="#TOC_Alarm">Alarms</a>'}, 'Main_Menu'],
+                [{v:'Alarm_Selection', f:'Select Alarm'}, 'Alarm_Menu'],
+                [{v:'Alarm_Time', f:'<div style="font-weight:bold; font-style:italic">IF_Enabled</div>Set Alarm Time'}, 'Alarm_Selection'],
+                [{v:'Alarm_Days', f:'Select Alarm Days'}, 'Alarm_Time'],
+                [{v:'Alarm_Music', f:'Select Alarm Music'}, 'Alarm_Days'],
+
+                [{v:'Brightness_Menu', f:'<a href="#TOC_Display_Brightness">Display Brightness</a>'}, 'Main_Menu'],
+                [{v:'Brightness_Setting', f:'Set Brightness'}, 'Brightness_Menu'],
+                [{v:'Brightness_Gain', f:'<div style="font-weight:bold; font-style:italic">IF_Auto</div>Set Gain'}, 'Brightness_Setting'],
+                [{v:'Brightness_Offset', f:'Set Offset'}, 'Brightness_Gain'],
+                [{v:'Brightness_Night_Mode', f:'Select Night Mode'}, 'Brightness_Offset'],
+
+                [{v:'Configuration_Menu', f:'<a href="#TOC_Configuration">Configuration</a>'}, 'Main_Menu'],
+                [{v:'Configuration_Time_Format', f:'Select Time Format'}, 'Configuration_Menu'],
+                [{v:'Configuration_Date_Format', f:'Select Date Format'}, 'Configuration_Time_Format'],
+                [{v:'Configuration_Noise', f:'Select Noise'}, 'Configuration_Date_Format'],
+                [{v:'Configuration_Effect', f:'Select Effect'}, 'Configuration_Noise'],
+                [{v:'Configuration_Phrase', f:'Set Phrase'}, 'Configuration_Effect'],
+
+                [{v:'Blanking_Menu', f:'<a href="#TOC_Display_Blanking">Display Blanking</a>'}, 'Main_Menu'],
+                [{v:'Blanking_Power_Off', f:'Set Display Power&#8209;Off'}, 'Blanking_Menu'],
+                [{v:'Blanking_Power_On', f:'Set Display Power&#8209;On'}, 'Blanking_Power_Off'],
+
+                [{v:'Time_Menu', f:'<a href="#TOC_Set_Time">Set Time</a>'}, 'Main_Menu'],
+                [{v:'Time_Setting', f:'Set Time'}, 'Time_Menu'],
+
+                [{v:'Date_Menu', f:'<a href="#TOC_Set_Date">Set Date</a>'}, 'Main_Menu'],
+                [{v:'Date_Setting', f:'Set Date'}, 'Date_Menu'],
+
+                [{v:'LED_Menu', f:'<a href="#TOC_LED_Effect">LED Effect</a>'}, 'Main_Menu'],
+                [{v:'LED_Selection', f:'Select Effect'}, 'LED_Menu'],
+
+                [{v:'Music_Menu', f:'<a href="#TOC_Music">Music</a>'}, 'Main_Menu'],
+                [{v:'Music_Selection', f:'Select Music'}, 'Music_Menu'],
+
+                [{v:'Timer_Menu', f:'<a href="#TOC_Timer">Timer</a>'}, 'Main_Menu'],
+                [{v:'Timer_Duration', f:'Set Duration'}, 'Timer_Menu'],
+            ]);
+
+            // Create the chart.
+            var main_menu = new google.visualization.OrgChart(document.getElementById('chart_main_menu'));
+
+            // Draw the chart
+            main_menu.draw(data, {allowHtml:true});
+        }
+        // Callback that creates and populates the menu chart
+        function drawInfoMenu()
+        {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Node');
+            data.addColumn('string', 'Parent');
+
+            data.addRows([
+                [{v:'Date_Info', f:'<b>Display Date</b><div style="font-style:italic">Displays the current date.</div>'}, ''],
+                [{v:'Version_Info', f:'<b>Display Version</b><div style="font-style:italic">Displays the current firmware version.</div>'}, 'Date_Info'],
+                [{v:'Reset_Menu', f:'<b>Reset Settings</b><div style="font-style:italic">Presents option to reset all settings back to default, including alarms.</div>'}, 'Version_Info'],
+            ]);
+
+            // Create the chart.
+            var info_menu = new google.visualization.OrgChart(document.getElementById('chart_info_menu'));
+
+            // Draw the chart
+            info_menu.draw(data, {allowHtml:true});
+        }
+    </script>
+
+    <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
+</head>
+
+<body>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 100px">
+        <h2>
+            <div class="break"><br></br></div>
+            PhotoniClock<br />
+            User Manual
+        </h2>
+    </div>
+    <br></br>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <img src="images/PhotoniClock.png" width="500px">
+    </div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 100px">
+        <h4>
+            <div class="break"><br></br></div>
+            Last Revised: 25 September 2018<br />
+        </h4>
+    </div>
+    <br></br>
+    <div class="pagebreak"></div>
+    
+    <br></br>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <div id="toc_container">
+        <ol>
+            <p class="toc_title">Table of Contents</p>
+            <li><a href="#TOC_Introduction">Introduction</a></li>
+            <li><a href="#TOC_Features">Features</a></li>
+            <li><a href="#TOC_Specifications">Specifications</a></li>
+            <li><a href="#TOC_Safety">Safety</a></li>
+            <li><a href="#TOC_Background">Background</a></li>
+            <li><a href="#TOC_Operation">Operation</a>
+                <ol>
+                    <li><a href="#TOC_Info_Menu">Info Menu</a></li>
+                    <li><a href="#TOC_Disable_Display">Disable Display</a></li>
+                    <li><a href="#TOC_Main_Menu">Main Menu</a></li>
+                    <li><a href="#TOC_Alarm">Alarms</a></li>
+                    <li><a href="#TOC_Display_Brightness">Display Brightness</a></li>
+                    <li><a href="#TOC_Configuration">Configuration</a></li>
+                    <li><a href="#TOC_Display_Blanking">Display Blanking</a></li>
+                    <li><a href="#TOC_Set_Time">Set Time</a></li>
+                    <li><a href="#TOC_Set_Date">Set Date</a></li>
+                    <li><a href="#TOC_LED_Effect">LED Effect</a></li>
+                    <li><a href="#TOC_Music">Music</a></li>
+                    <li><a href="#TOC_Timer">Timer (Countdown)</a></li>
+                </ol></li>
+            <li><a href="#TOC_Open_Source">Open-Source Hardware & Software</a>
+                <ol>
+                    <li><a href="#TOC_Flashing_Firmware">Flashing Firmware</a></li>
+                    <li><a href="#TOC_Custom_Music">Custom Music</a></li>
+                </ol></li>
+            <li><a href="#TOC_Revision_History">Revision History</a></li>
+            <li><a href="#TOC_Contact_Information">Contact Information</a></li>
+            <li><a href="#TOC_Warranty">Warranty</a></li>
+        </ol>
+        </div>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Introduction">INTRODUCTION</h3>
+        <p>Congratulations on choosing the PhotoniClock! It is a fusion of past and present, combining the elegance of a bygone era with the technology of today. We hope it finds a place in your life and piques the curiosity of all who encounter it.</p>
+        <p>Thank you,</p>
+        <p>The PhotonicFusion Team</p>
+    </div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Features">FEATURES</h3>
+        <div>•&emsp;Handcrafted Padauk wood finished with a protective natural oil.</div>
+        <div>•&emsp;Accurate timekeeping via temperature-compensated crystal oscillator (TCXO).</div>
+        <div>•&emsp;RTC backup for +24hr power-loss time retention (unlike your microwave).</div>
+        <div>•&emsp;Three alarms with individual day of the week settings.</div>
+        <div>•&emsp;Configurable Date/Time formats and Power On/Off schedule.</div>
+        <div>•&emsp;Ambient light sensing adapts display brightness to environment.</div>
+        <div>•&emsp;Music database of 40+ songs.</div>
+        <div>•&emsp;RGB LEDs provide colorful and unique lighting effects.</div>
+        <div>•&emsp;Input voltage protection from Over/Under/Reverse conditions.</div>
+        <div>•&emsp;Includes standard FTDI header for programming via Arduino IDE.</div>
+        <div>•&emsp;Open-source software and hardware.</div>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Specifications">SPECIFICATIONS</h3>
+        <table class="striped">
+            <thead><tr><th>Item</th><th>Specification</th></tr></thead>
+            <tbody>
+                <tr><td>Input voltage range</td><td>+9V to +15V (*see note)</td></tr>
+                <tr><td>Typical input power</td><td>4.2W</td></tr>
+                <tr><td>Under/Over-voltage protection</td><td>±32V</td></tr>
+                <tr><td>Over-current protection</td><td>PTC Thermistor, 750mA trip current</td></tr>
+                <tr><td>Typical clock drift</td><td>Less than 10s per month</td></tr>
+                <tr><td>Operating temperature</td><td>0°C to 50°C (32°F to 122°F)</td></tr>
+                <tr><td>Storage Temperature</td><td>-20°C to 60°C (-44°F to 140°F)</td></tr>
+            </tbody>
+        </table>
+        <p><b>*Note:</b> Use the provided power adapter or use a power supply rated for a current of at least 1A to ensure the PhotoniClock's over-current protection mechanism can function properly.</p>
+    </div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Safety">SAFETY</h3>
+        <p>The PhotoniClock has basic protection against over-current, over-voltage, and under-voltage conditions, however care should be taken to prevent these conditions from occurring. Be careful not to touch or short any exposed circuit while powered, as doing so may permanently damage the clock. Do not modify the circuit in any way. Use the provided power adapter or a power supply rated for a current of at least 1A to ensure the PhotoniClock's over-current protection mechanism can function properly.</p>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Background">BACKGROUND</h3>
+        <p>The PhotoniClock utilizes Vacuum Fluorescent Display (VFD) tubes, a specialized type of vacuum tube developed throughout the early 1960s into the late 1980s designed specifically for alphanumeric indication. The VFD tubes selected for this clock are called IV-11. They are a medium-sized, discrete, seven-segment display manufactured originally for the USSR by the Reflector plant in Saratov, Russia from the 1980s until 1993.</p>
+        <p>VFD tubes operate under the same principals of vacuum tubes. Each tube contains two very thin wires called filaments through which an electric current is passed. If you view the PhotoniClock in a dark environment and reduce the display brightness, you may see the two filaments faintly glowing. Each of the VFD tube's seven segments are electrically connected to a circuit which can toggle a high voltage on/off, +56V in this particular design. When this high voltage is applied to a segment, negatively charged electrons emitted from the filament are magnetically attracted towards the positively charged segment. Upon striking the segment, the electrons are absorbed by a phosphor coating which re-emits the energy in the form of visible light, specifically a characteristic blue-green light associated with VFDs.</p>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Operation">OPERATION</h3>
+        <p>On the backside of the PhotoniClock is a combined rotary encoder and button knob. This knob is the sole method of input for controlling the PhotoniClock. When the PhotoniClock first turns on, it enters <i>Clock Mode</i> (displaying the current time). The <i>Info Menu</i> and the <i>Main Menu</i> are only accessible when in <i>Clock Mode</i>. All menus eventually timeout and return to <i>Clock Mode</i>. Settings will not be modified if a timeout occurs before completion.</p>
+        <p>Time is presented in this documentation using the format <i>HH:MM:SS</i> where <i>HH</i>=Hours, <i>MM</i>=Minutes, and <i>SS</i>=Seconds.</p>
+        
+        <h4 id="TOC_Info_Menu">INFO MENU</h4>
+        <p>Access the <i>Info Menu</i> by pressing the knob when in <i>Clock Mode</i>. The menu hierarchy is shown below. Advance to subsequent menu items by pressing the knob again.</p>
+        <div id="chart_info_menu"></div>
+        
+        <h4 id="TOC_Disable_Display">DISABLE DISPLAY</h4>
+        <p>The display can be turned off by pressing and holding the knob for at least 3 seconds when entering the <i>Info Menu</i>. The display will remain off until user input is received, an alarm occurs, or the display blanking <a href="#Power_On"><i>Power&#8209;On</i></a> time matches the current time.</p>
+        <div class="pagebreak"></div>
+        
+        <h4 id="TOC_Main_Menu">MAIN MENU</h4>
+        <p>Access the <i>Main Menu</i> by rotating the knob in any direction when in <i>Clock Mode</i>. The menu hierarchy is shown below. Detailed information on each menu item is described in the sections that follow.</p>
+        <div id="chart_main_menu"></div>
+    </div><div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Alarm">ALARMS</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Alarm" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Alarm = new SegmentDisplay("Draw_Alarm");
+                    Draw_Alarm.draw();
+                    Draw_Alarm.setValue("Alarm");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock features three individual alarms. Each alarm may be set for a specific time and day(s) of the week for which it shall be active. The decimal of the leftmost VFD tube indicates whether an alarm is armed within the next 24 hours. If an alarm is armed, the decimal will be illuminated.</p>
+        <p>When an alarm time and day matches the current time and day, an alarm event will occur. An alarm event will cause the display to turn on (if it was previously off) and the alarm music selection to sound. The alarm will sound for at least 2 minutes or until interrupted. Any user input will interrupt the alarm.</p>
+        <p><b>Setting an alarm:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">Alarm</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;Select one of the three alarms <span class="digital">A1</span>, <span class="digital">A2</span>, or <span class="digital">A3</span> from the list. The current state of the alarm is displayed beside it as <span class="digital">On</span> if at least one day of the week is enabled, otherwise <span class="digital">Off</span> will be displayed.</li>
+            <li>&emsp;Select <span class="digital">Enable</span> to continue configuring the alarm, or <span class="digital">Dsable</span> to disable the alarm and exit.</li>
+            <li>&emsp;<span class="digital">&nbsp;Set&nbsp;&nbsp;</span>&emsp;Set the time of day when the alarm should sound.</li>
+            <li>&emsp;The day selection menu will cycle through all days of the week. You may skip to any day by rotating the knob. Select a day to choose whether the alarm should be armed (&nbsp;<span class="digital">Enable</span>&nbsp;) or disarmed (&nbsp;<span class="digital">Dsable</span>&nbsp;) for that day. The menu will automatically advance to the next day after a selection is made. Exit the menu by selecting <span class="digital">&#8209;Done&#8209;</span> from the menu.</li>
+            <li>&emsp;<span class="digital">Audio&nbsp;</span>&emsp;Select the music that will play when the alarm sounds.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Display_Brightness">DISPLAY BRIGHTNESS</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Bright" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Bright = new SegmentDisplay("Draw_Bright");
+                    Draw_Bright.draw();
+                    Draw_Bright.setValue("Bright");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock has 8 brightness levels for the display. In addition, there in an <i>Auto Mode</i> that will adjust the display brightness according to the ambient lighting conditions. After selecting <i>Auto Mode</i>, there in an option to enable <i>Night Mode</i> which will use minimum display brightness and turn off the LEDs when dark ambient conditions are present. This provides an acceptable brightness level to avoid being bothersome at night.</p>
+        <p><b>Setting the display brightness:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">Bright</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;Select one of the 8 brightness settings or select <span class="digital">&nbsp;Auto&nbsp;</span> to enable automatic brightness. If <i>Auto Mode</i> is selected, follow the remaining steps.</li>
+            <li>&emsp;<span class="digital">&nbsp;Gain&nbsp;</span>&emsp;Select the sensor gain. This value adjusts the sensitivity of the light sensor.</li>
+            <li>&emsp;<span class="digital">Offset</span>&emsp;Select the sensor offset. This value adjusts the minimum value measured by the light sensor.</li>
+            <li>&emsp;<span id="Night_Mode" class="digital">Night&nbsp;</span>&emsp;Select whether to enable (&nbsp;<span class="digital">Enable</span>&nbsp;) or disable (&nbsp;<span class="digital">Dsable</span>&nbsp;) <i>Night Mode</i>. When enabled and dark ambient conditions are present, minimum display brightness will be used and the LEDs will be disabled.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Configuration">CONFIGURATION</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Config" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Config = new SegmentDisplay("Draw_Config");
+                    Draw_Config.draw();
+                    Draw_Config.setValue("Config");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock is customizable and can be configured to user preference. Configuration settings include time and date format, knob noise generation, display effects, and custom phrase.</p>
+        <p><b>Configuring the PhotoniClock:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">Config</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span id="Hour_Format" class="digital">&nbsp;Hour&nbsp;</span>&emsp;Select the hour format to be <i>12&#8209;hour</i> (&nbsp;<span class="digital">12&nbsp;hr&nbsp;</span>&nbsp;) or <i>24&#8209;hour</i> (&nbsp;<span class="digital">24&nbsp;hr&nbsp;</span>&nbsp;) mode.</li>
+            <li>&emsp;<span id="Date_Format" class="digital">&nbsp;Date&nbsp;</span>&emsp;Select the date format to be <i>Y&#8209;M&#8209;D</i> (&nbsp;<span class="digital">Y&#8209;M&#8209;D</span>&nbsp;), <i>M&#8209;D&#8209;Y</i> (&nbsp;<span class="digital">M&#8209;D&#8209;Y</span>&nbsp;), or <i>D&#8209;M&#8209;Y</i> (&nbsp;<span class="digital">D&#8209;M&#8209;Y</span>&nbsp;) where <i>D</i>=Day, <i>M</i>=Month, and <i>Y</i>=Year.</li>
+            <li>&emsp;<span class="digital">Noise&nbsp;</span>&emsp;Select whether an audible blip is enabled (&nbsp;<span class="digital">Enable</span>&nbsp;) or disabled (&nbsp;<span class="digital">Dsable</span>&nbsp;) when the rotary encoder knob is turned.</li>
+            <li>&emsp;<span class="digital">Effect</span>&emsp;Select whether an effect should be displayed during normal clock display. Options include:
+                <div></div>•&emsp;<span class="digital">&nbsp;None&nbsp;</span>&emsp;No effect will be displayed.
+                <div></div>•&emsp;<span class="digital">Spiral</span>&emsp;A spiral effect will be displayed when the seconds reach 0.
+                <div></div>•&emsp;<span class="digital">&nbsp;Date&nbsp;</span>&emsp;The current date will be displayed when the seconds reach 30.
+                <div></div>•&emsp;<span class="digital">Phrase</span>&emsp;The user configured phrase will be displayed when the seconds reach 30.
+                </li>
+            <li>&emsp;<span class="digital">Phrase</span>&emsp;Input a custom phrase to display during alarms and display effects.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Display_Blanking">DISPLAY BLANKING</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Blank" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Blank = new SegmentDisplay("Draw_Blank");
+                    Draw_Blank.draw();
+                    Draw_Blank.setValue("Dsplay");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock includes a display blanking feature which allows for scheduled times when the display should turn off/on. This feature is useful if you want to turn off the clock at night (alternatively see <a href="#Night_Mode"><i>Night&nbsp;Mode</i></a>), or prolong the lifespan of the VFD tubes.</p>
+        <p><b>Setting the display blanking schedule:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">Dsplay</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span class="digital">P-Off&nbsp;</span>&emsp;Input the time in <i>HH:MM</i> when the display should power&#8209;off.</li>
+            <li>&emsp;<span id="Power_On" class="digital">&nbsp;P-On&nbsp;</span>&emsp;Input the time in <i>HH:MM</i> when the display should power&#8209;on.</li>
+        </ol>
+        <p><b>Disable display blanking:</b></p>
+        <p>To disable display blanking, simply set the <i>P&#8209;Off</i> and <i>P&#8209;On</i> times to be equal. This prevents display blanking from occurring.</p>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Set_Time">SET TIME</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Time" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Time = new SegmentDisplay("Draw_Time");
+                    Draw_Time.draw();
+                    Draw_Time.setValue(" Time ");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock utilizes an RTC with a temperature-compensated crystal oscillator (TCXO). This particular RTC has a very low clock drift, specified less than 10s per month. In addition, an on-board supercapacitor maintains RTC time and date during a power-loss event for over 24 hours.</p>
+        <p><b>Setting the time:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">&nbsp;Time&nbsp;</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span class="digital">&nbsp;Time&nbsp;</span>&emsp;Input the time in <i>HH:MM:SS</i> to set the clock.</li>
+            <li>&emsp;<span class="digital">Cycle&nbsp;</span>&emsp;If the <a href="#Hour_Format"><i>Hour Format</i></a> is configured to <i>12-hour</i> mode, there will be an additional selection asking for current cycle. Choose between <i>AM</i> (&nbsp;<span class="digital">&nbsp;&nbsp;AM&nbsp;&nbsp;</span>&nbsp;) and <i>PM</i> (&nbsp;<span class="digital">&nbsp;&nbsp;PM&nbsp;&nbsp;</span>&nbsp;). The decimal of the rightmost VFD tube indicates the current cycle. It will illuminate when the cycle is <i>PM</i>.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Set_Date">SET DATE</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Date" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Date = new SegmentDisplay("Draw_Date");
+                    Draw_Date.draw();
+                    Draw_Date.setValue(" Date ");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock RTC automatically adjusts for leap years and accepts dates from 01&#8209;January&#8209;2000, to 31&#8209;December&#8209;2099.</p>
+        <p><b>Setting the date:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">&nbsp;Date&nbsp;</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span class="digital">&nbsp;Date&nbsp;</span>&emsp;Input the date to set the clock. The format used will be <i>Y&#8209;M&#8209;D</i>, <i>M&#8209;D&#8209;Y</i>, or <i>D&#8209;M&#8209;Y</i> where <i>D</i>=Day, <i>M</i>=Month, and <i>Y</i>=Year depending on which <a href="#Date_Format"><i>Date&nbsp;Format</i></a> is configured.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_LED_Effect">LED EFFECT</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_LED" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_LED = new SegmentDisplay("Draw_LED");
+                    Draw_LED.draw();
+                    Draw_LED.setValue(" LEDs ");
+                </script>
+            </div>
+        </div>
+        <p>Beneath each VFD tube is an RGB LED. This array of LEDs can be configured to display effects listed in the description below. LED brightness is automatically adjusted to match the display brightness. In the event that <a href="#Night_Mode"><i>Night&nbsp;Mode</i></a> is triggered, the LEDs will be disabled.</p>
+        <p><b>Setting the LED effect:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">&nbsp;LEDs&nbsp;</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span class="digital">Effect</span>&emsp;Select the LED effect desired. Options include:
+                <div></div>•&emsp;<span class="digital">Static</span>&emsp;Static color choice.
+                <div></div>•&emsp;<span class="digital">Pulse&nbsp;</span>&emsp;Slow pulsing color choice.
+                <div></div>•&emsp;<span class="digital">&nbsp;Fire&nbsp;</span>&emsp;Fire effect of color choice.
+                <div></div>•&emsp;<span class="digital">&nbsp;1982&nbsp;</span>&emsp;Knight Rider effect of color choice.
+                <div></div>•&emsp;<span class="digital">&nbsp;Pong&nbsp;</span>&emsp;Color-changing bounce.
+                <div></div>•&emsp;<span class="digital">&nbsp;Fade&nbsp;</span>&emsp;Slow color-changing transitions.
+                <div></div>•&emsp;<span class="digital">Rainbo</span>&emsp;LEDs cycle through hue in unison.
+                <div></div>•&emsp;<span class="digital">CShift</span>&emsp;LEDs cycle through hue in sequence.
+                <div></div>•&emsp;<span class="digital">Ghost&nbsp;</span>&emsp;Slow color orbs.
+                <div></div>•&emsp;<span class="digital">Drops&nbsp;</span>&emsp;Colors drop and combine every second.
+                <div></div>•&emsp;<span class="digital">Digit&nbsp;</span>&emsp;Hours, Minutes, Seconds translate to colors.
+                <div></div>•&emsp;<span class="digital">Tetris</span>&emsp;Colors "fall" and collect.
+                <div></div>•&emsp;<span class="digital">Cycle&nbsp;</span>&emsp;Cycle through all effects except Static and Disable.
+                <div></div>•&emsp;<span class="digital">Dsable</span>&emsp;No effect will be displayed.
+                </li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Music">MUSIC (AUDIO)</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Music" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Music = new SegmentDisplay("Draw_Music");
+                    Draw_Music.draw();
+                    Draw_Music.setValue("Audio ");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock features two miniature transducers capable of square-wave generation. Included in an on-board EEPROM is a library of music listed in the description below. Cycle through the music library to experience a retro interpretation of iconic and modern songs. Users may optionally upload their own music following the procedure documented in section <a href="#TOC_Custom_Music">Custom Music</a>.</p>
+        <p><b>Browsing the music library:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">Audio&nbsp;</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span class="digital">Audio&nbsp;</span>&emsp;Select the music for Alarm/Countdown events. Music list:</li>
+        </ol>
+        <div style="width: 625px; padding: 0px 2em 1em">
+            <table class="numbered" style="float: left; width:50%;">
+                <thead><tr><th>Entries 00-24</th></tr></thead>
+                <tbody>
+                    <tr><td>Alarm, Slow Beep</td></tr>
+                    <tr><td>Alarm, Fast Beep</td></tr>
+                    <tr><td>Ave_Maria</td></tr>
+                    <tr><td>Bach_Prelude</td></tr>
+                    <tr><td>Back_To_The_Future_Theme</td></tr>
+                    <tr><td>Cave_Story_Moonsong</td></tr>
+                    <tr><td>Fantaisie_Impromptu</td></tr>
+                    <tr><td>Far_Off_Promise</td></tr>
+                    <tr><td>Fortitude</td></tr>
+                    <tr><td>G&amp;W_Gallery_2_Parachute</td></tr>
+                    <tr><td>Game_of_Thrones</td></tr>
+                    <tr><td>God_Save_The_Queen</td></tr>
+                    <tr><td>Hall_of_the_Mountain_King</td></tr>
+                    <tr><td>Harry_Potter_Hedwigs_Theme</td></tr>
+                    <tr><td>He_is_a_pirate</td></tr>
+                    <tr><td>Jurassic_Park_Theme</td></tr>
+                    <tr><td>Kalinka</td></tr>
+                    <tr><td>Katyusha</td></tr>
+                    <tr><td>Kirby_Gourmet_Race</td></tr>
+                    <tr><td>Knight_Rider</td></tr>
+                    <tr><td>Legend_of_Zelda_Overworld</td></tr>
+                    <tr><td>Stone_Tower_Temple</td></tr>
+                    <tr><td>Marriage_D_Amour</td></tr>
+                    <tr><td>Metroid_Kraids_Hideout</td></tr>
+                    <tr><td>Mission_Impossible_Theme</td></tr>
+                </tbody>
+            </table>
+            <table class="numbered" style="width:50%; counter-reset: rowNumber+25;">
+                <thead><tr><th>Entries 25+</th></tr></thead>
+                <tbody>
+                    <tr><td>Morrisons_Jig</td></tr>
+                    <tr><td>Mortal_Kombat_Theme</td></tr>
+                    <tr><td>PacMan_Intro</td></tr>
+                    <tr><td>Pallet_Town</td></tr>
+                    <tr><td>Pokemon_Battle</td></tr>
+                    <tr><td>Portal_Halls_of_Science</td></tr>
+                    <tr><td>Portal_Still_Alive</td></tr>
+                    <tr><td>Song_of_Storms</td></tr>
+                    <tr><td>Sonic_the_Hedgehog</td></tr>
+                    <tr><td>SquareWave</td></tr>
+                    <tr><td>Super_Mario_3_Overworld_2</td></tr>
+                    <tr><td>Super_Mario_Bros_Overworld</td></tr>
+                    <tr><td>Tanzunite</td></tr>
+                    <tr><td>Tetris_A_Theme</td></tr>
+                    <tr><td>The_Star_Spangled_Banner</td></tr>
+                    <tr><td>Undertale_Spider_Dance</td></tr>
+                    <tr><td>Under_the_Sea</td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagebreak"></div>
+
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Timer">TIMER (COUNTDOWN)</h4>
+        <div style="width: 665px; height: 190px; position: relative; background: transparent url(images/display.png) no-repeat top left">
+            <div style="position: absolute; left: 50px; top: 45px;">
+                <canvas id="Draw_Timer" width="300" height="50"></canvas>
+                <script type="text/javascript">
+                    var Draw_Timer = new SegmentDisplay("Draw_Timer");
+                    Draw_Timer.draw();
+                    Draw_Timer.setValue("Countd");
+                </script>
+            </div>
+        </div>
+        <p>The PhotoniClock includes a timer feature with a configurable countdown duration up to 1 day. Use the timer to easily set a single-use alarm for reminders, timing, and cases where a periodic alarm isn't needed. When the timer countdown reaches 0, an alarm will sound for at least 2 minutes or until interrupted.</p>
+        <p><b>Setting the timer:</b></p>
+        <ol>
+            <li>&emsp;Select <span class="digital">Countd</span> from the <i>Main Menu</i>.</li>
+            <li>&emsp;<span class="digital">&nbsp;Set&nbsp;&nbsp;</span>&emsp;Input the duration in <i>HH:MM:SS</i> to set the timer.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Open_Source">OPEN-SOURCE HARDWARE & SOFTWARE</h3>
+        <p>The PhotoniClock project is open-source and available on GitHub from the following link:</p>
+        <p><a href="https://github.com/photonicfusion/photoniclock">https://github.com/photonicfusion/photoniclock</a></p>
+    </div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Flashing_Firmware">FLASHING FIRMWARE</h4>
+        <p>To flash firmware to the PhotoniClock, follow the procedure below.</p>
+        <ol>
+            <li>&emsp;Download the latest firmware and utilities from GitHub.</li>
+            <li>&emsp;Use the provided Makefile or Arduino IDE to compile the source to binary.</li>
+            <li>&emsp;Use the provided python script PhotoniClock/Utilities/FlashProduction.py or Arduino IDE to upload the binary to the PhotoniClock using an FTDI cable.</li>
+        </ol>
+    </div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h4 id="TOC_Custom_Music">CUSTOM MUSIC</h4>
+        <p>Custom music can be added to the PhotoniClock. Follow the procedure below.</p>
+        <ol>
+            <li>&emsp;Download the latest firmware and utilities from GitHub.</li>
+            <li>&emsp;Install Python and the required modules (run PhotoniClock/Utilities/FlashProduction.py to determine missing modules).</li>
+            <li>&emsp;Prepare music in MIDI format. For best results, choose MIDI files with few channels and note/rest durations no smaller than triplet sixteenth. Place MIDI files into the PhotoniClock/Utilities/MIDI directory.</li>
+            <li>&emsp;Follow the steps provided in section <a href="#TOC_Flashing_Firmware">Flashing Firmware</a> and use "-e" flag with PhotoniClock/Utilities/FlashProduction.py to invoke EEPROM upload.</li>
+        </ol>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Revision_History">REVISION HISTORY</h3>
+        <table class="striped">
+            <thead><tr><th>Date</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td>30 August 2018</td><td>Initial Release</td></tr>
+                <tr><td>25 September 2018</td><td>Updated Music list. Updated URLs.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagebreak"></div>
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Contact_Information">CONTACT INFORMATION</h3>
+        <p>If you have a warranty claim or need support, please contact us at: <a href="mailto:support@photonicfusion.io">support@photonicfusion.io</a></p>
+        <p>The PhotoniClock and accessories can be purchased at <a href="https://photonicfusion.io">https://photonicfusion.io</a></p>
+    </div>   
+    
+    <div class="break"><br></br></div>
+    <div style="width: 700px; word-wrap: break-word; padding: 0px 50px">
+        <h3 id="TOC_Warranty">WARRANTY</h3>
+        <p>The PhotoniClock is warranted to be free from defects in materials and workmanship for a period of one year from the date of purchase. If within the warranty period your unit should become inoperative from such defects, the unit will be repaired or replaced at the option of PhotonicFusion. This warranty covers normal use and does not cover damage which occurs in shipment or failure which results from alteration, tampering, hacking, accident, misuse, abuse, neglect or improper maintenance.</p>
+        <p>Any implied warranties, including but not limited to implied warranties of merchantability and fitness for a purpose, are limited to the express warranty. PhotonicFusion shall not be liable for loss of use of the unit or other incidental or consequential damages, expenses, or economic loss, or
+        for any claim or claims for such damage, expenses or economic loss. A purchase receipt or other proof of original purchase date will be required before warranty repairs or replacement will be rendered.</p>
+    </div>
+    <br></br>
+
+</body>
+
+</html>

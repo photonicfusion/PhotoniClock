@@ -1,0 +1,10 @@
+EEPROM Layout
+
+Address     Bytes   Description
+======================================================
+0x0000      2       Number of song entries
+0x0002      2       Entry 0 offset in bytes
+0x0004      2       Entry 1 offset in bytes
+0x01FE      2       Entry 254 offset in bytes   
+0x0200      n       Start of entry 0 data   
+0xFFFF      n       End of entry n data

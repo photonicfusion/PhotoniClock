@@ -1,0 +1,168 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+@font-face {
+    font-family: 'photonicdigitalregular';
+    src: url('../font/photonicdigital-webfont.woff2') format('woff2'),
+         url('../font/photonicdigital-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: "Calibri", sans serif;
+    font-size: large;
+}
+
+br {
+    line-height: 10%;
+}
+
+h2 {
+    font-weight: lighter;
+    font-size: 55px;
+}
+
+h3 {
+    font-weight: lighter;
+    font-size: xx-large;
+}
+
+h4 {
+    font-size: x-large;
+}
+
+td, th {
+    border-radius: 0px;
+}
+
+table {
+    border-collapse: initial;
+    line-height: 1.0;
+}
+
+table.striped > tbody > tr:nth-child(odd) {
+    background-color: rgba(242, 242, 242, 0.95);
+}
+
+table.numbered {
+    counter-reset: rowNumber;
+}
+
+table.numbered tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
+
+table.numbered tr td:first-child::before {
+    content: counter(rowNumber, decimal-leading-zero);
+    min-width: 1em;
+    margin-right: 1em;
+}
+
+table.numbered td, th {
+    padding: 2px;
+}
+
+table.numbered > tbody > tr:nth-child(odd) {
+    background-color: rgba(242, 242, 242, 0.95);
+}
+
+ol {
+    counter-reset: item
+}
+
+li {
+    display: block;
+    list-style-position: inside;
+    text-indent: -2em;
+}
+
+.digital {
+    font-family: 'photonicdigitalregular', sans serif;
+    font-size: 20px;
+    display: inline;
+    background-color: #e6e6e6; 
+}
+
+.break {
+    line-height: 50%;
+}
+
+.pagebreak { page-break-after: always; } /* page-break-before works, as well */
+
+li:before {
+    content: counters(item, ".")". ";
+    counter-increment: item
+}
+
+.toc_title {
+    font-size: xx-large;
+    font-weight: lighter;
+    text-align: left;
+}
+
+#toc_container {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    display: table;
+    margin-bottom: 1em;
+    padding: 20px;
+    width: 500px;
+}
+
+#toc_container li, #toc_container ul, #toc_container ul li{
+    list-style: outside none none !important;
+}
+
+#chart_main_menu .google-visualization-orgchart-linebottom {
+    border-bottom: 3px solid #555555;
+}
+
+#chart_main_menu .google-visualization-orgchart-lineleft {
+    border-left: 3px solid #555555;
+}
+
+#chart_main_menu .google-visualization-orgchart-lineright {
+    border-right: 3px solid #555555;
+}
+
+#chart_main_menu .google-visualization-orgchart-linetop {
+    border-top: 3px solid #555555;
+}
+
+#chart_main_menu .google-visualization-orgchart-node {
+    font-family: calibri;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px 0px;
+    border: 2px solid #aaaaaa;
+    background-color: #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dddddd));
+}
+
+#chart_info_menu .google-visualization-orgchart-linebottom {
+    border-bottom: 3px solid #555555;
+}
+
+#chart_info_menu .google-visualization-orgchart-lineleft {
+    border-left: 3px solid #555555;
+}
+
+#chart_info_menu .google-visualization-orgchart-lineright {
+    border-right: 3px solid #555555;
+}
+
+#chart_info_menu .google-visualization-orgchart-linetop {
+    border-top: 3px solid #555555;
+}
+
+#chart_info_menu .google-visualization-orgchart-node {
+    font-family: calibri;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px 0px;
+    border: 2px solid #aaaaaa;
+    background-color: #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dddddd));
+}
